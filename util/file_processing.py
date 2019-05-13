@@ -1,8 +1,11 @@
 import pandas as pd
 import os
 import time
+from dotenv import load_dotenv
 
-from util.string_processing import prepare_feature
+from util.string_processing import prepare_feature_for_csv
+
+load_dotenv()
 
 
 def get_data_from_file(file_path: str) -> list:
@@ -49,12 +52,12 @@ def get_videos_data_from_csv(*files) -> list:
     return videos_data
 
 
-def save_videos_data_into_csv(videos_data: list, output_dir=os.getenv('RAW_DATA_DIR'), file_name=None):
+def save_videos_data_into_csv(videos_data: list, file_name=None, output_dir=os.getenv('RAW_DATA_DIR')):
     if videos_data is None:
         raise ValueError('Videos data can`t be None!')
 
     if file_name is None:
-        file_name = f"{time.strftime('%d.%m.%y_%H.%M.%S')}_videos.csv"
+        file_name = f"{time.strftime('%d-%m-%y_%H.%M.%S')}_videos.csv"
 
     csv_data = [','.join(videos_data[0].keys())]
 
@@ -62,7 +65,7 @@ def save_videos_data_into_csv(videos_data: list, output_dir=os.getenv('RAW_DATA_
         if video is None:
             continue
 
-        csv_data.append(','.join([prepare_feature(val) for val in video.values()]))
+        csv_data.append(','.join([prepare_feature_for_csv(val) for val in video.values()]))
 
     write_to_file(
         output_dir,

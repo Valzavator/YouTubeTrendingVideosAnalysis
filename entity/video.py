@@ -4,15 +4,14 @@ import time
 class YouTubeVideo:
 
     def __init__(self):
-        self._id = "1"
+        self._id = ""
         self.country_code = ""
         self.title = ""
         self.publishedAt = ""
-        self.channelId = ""
         self.channelTitle = ""
         self.categoryId = ""
         self.trending_date = time.strftime("%y.%d.%m")
-        self.tags = []
+        self.tags = "[none]"
         self.view_count = 0
         self.likes = 0
         self.dislikes = 0

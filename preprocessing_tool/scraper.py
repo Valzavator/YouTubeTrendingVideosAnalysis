@@ -4,7 +4,7 @@ import time
 
 from entity.video import YouTubeVideo
 from util.args_processing import process_arguments
-from util.file_processing import get_data_from_file, write_to_file
+from util.file_processing import get_data_from_file
 from util.string_processing import prepare_feature, get_tags
 
 
@@ -15,29 +15,6 @@ class YouTubeTrendingVideosScraper:
 
         self.__raw_data_dir = args.raw_data_dir
         self.__api_key = args.api_key
-
-        # self.__country_codes = get_data_from_file(args.country_code_path)
-
-        self.__snippet_features = ["title",
-                                   "publishedAt",
-                                   "channelTitle",
-                                   "categoryId"]
-
-        # # Used to identify columns, currently hardcoded order
-        # self.__header = ["video_id"] + self.__snippet_features + ["trending_date", "tags", "view_count", "likes",
-        #                                                           "dislikes",
-        #                                                           "comment_count", "thumbnail_link",
-        #                                                           "comments_disabled",
-        #                                                           "ratings_disabled", "description"]
-
-    # def get_videos_data(self):
-    #     for country_code in self.__country_codes:
-    #         country_data = [",".join(self.__header)] + self.__get_videos_data_by_country(country_code)
-    #         write_to_file(
-    #             self.__raw_data_dir,
-    #             f"{self.__raw_data_dir}/{time.strftime('%d.%m.%y')}_{country_code}_videos.csv",
-    #             country_code,
-    #             country_data)
 
     def get_videos_data_by_country_codes(self, country_codes: list) -> list:
         countries_data = []
@@ -59,7 +36,7 @@ class YouTubeTrendingVideosScraper:
         return self.get_videos_data_by_country_codes(country_codes)
 
     def __get_videos_data_by_country(self, country_code, next_page_token="&") -> list:
-        country_data = []
+        videos_data_by_country = []
 
         # Because the API uses page tokens (which are literally just the same function of numbers everywhere) it is much
         # more inconvenient to iterate over pages, but that is what is done here.
@@ -75,9 +52,9 @@ class YouTubeTrendingVideosScraper:
             # Get all of the items as a list and let get_videos return the needed features
             items = video_data_page.get('items', [])
 
-            country_data += self.__get_videos_data_by_page(items, country_code)
+            videos_data_by_country += self.__get_videos_data_by_page(items, country_code)
 
-        return country_data
+        return videos_data_by_country
 
     def __api_request(self, page_token, country_code):
         # Builds the URL and requests the JSON from it
@@ -90,10 +67,9 @@ class YouTubeTrendingVideosScraper:
         return request.json()
 
     def __get_videos_data_by_page(self, items: list, country_code: str) -> list:
-        videos_data = []
+        videos_data_by_page = []
 
         for video_raw_data in items:
-            print(video_raw_data)
 
             video = YouTubeVideo()
 
@@ -102,7 +78,6 @@ class YouTubeTrendingVideosScraper:
             if "statistics" not in video_raw_data:
                 continue
 
-            video._id = prepare_feature(video_raw_data['id'])
             video.country_code = country_code
 
             # Snippet and statistics are sub-dicts of video, containing the most useful info
@@ -110,15 +85,18 @@ class YouTubeTrendingVideosScraper:
             statistics = video_raw_data['statistics']
 
             # All features in snippet that are 1 deep and require no special processing
-            for feature in self.__snippet_features:
-                video.__setattr__(feature, prepare_feature(snippet.get(feature, "")))
+
+            video.title = prepare_feature(snippet.get("title", ""))
+            video.publishedAt = prepare_feature(snippet.get("publishedAt", ""))
+            video.channelTitle = prepare_feature(snippet.get("channelTitle", ""))
+            video.categoryId = prepare_feature(snippet.get("categoryId", ""))
 
             # The following are special case features which require unique processing,
             # or are not within the snippet dict
             video.description = snippet.get("description", "")
             video.thumbnail_link = snippet.get("thumbnails", dict()).get("default", dict()).get("url", "")
             video.trending_date = time.strftime("%y.%d.%m")
-            video.tags = snippet.get("tags", [])
+            video.tags = get_tags(snippet.get("tags", "[none]"))
             video.view_count = statistics.get("viewCount", 0)
 
             # This may be unclear, essentially the way the API works is that if a video has comments or ratings disabled
@@ -132,6 +110,8 @@ class YouTubeTrendingVideosScraper:
                 video.comment_count = statistics['commentCount']
                 video.comments_disabled = False
 
-            videos_data.append(video)
+            video._id = prepare_feature(video_raw_data['id'] + video.trending_date)
 
-        return videos_data
+            videos_data_by_page.append(video.__dict__)
+
+        return videos_data_by_page
