@@ -1,4 +1,3 @@
-from bson import ObjectId
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError, BulkWriteError
 
@@ -48,6 +47,9 @@ class Database:
 
     def get_videos(self) -> list:
         return list(self.__videos_coll.find())
+
+    def get_videos_by_countries(self, country_codes: list) -> list:
+        return list(self.__videos_coll.find({'country_code': {'$in': country_codes}}))
 
     def clear_database(self):
         self.__videos_coll.remove()

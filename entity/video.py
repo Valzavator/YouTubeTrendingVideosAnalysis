@@ -7,9 +7,9 @@ class YouTubeVideo:
         self._id = ""
         self.country_code = ""
         self.title = ""
-        self.publishedAt = ""
-        self.channelTitle = ""
-        self.categoryId = ""
+        self.published_at = ""
+        self.channel_title = ""
+        self.category_id = ""
         self.trending_date = time.strftime("%y.%d.%m")
         self.tags = "[none]"
         self.view_count = 0
@@ -20,7 +20,7 @@ class YouTubeVideo:
         self.comments_disabled = True
         self.ratings_disabled = True
         self.description = ""
-    #
+
     # @property
     # def video_id(self) -> str:
     #     return self.__video_id
