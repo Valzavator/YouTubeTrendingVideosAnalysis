@@ -7,34 +7,41 @@ load_dotenv()
 
 class Args(object):
 
-    _api_key = None
-    _country_codes_path = None
-    _raw_data_dir = None
-    _category_id_file_path = None
+    __api_key = None
+    __country_codes_path = None
+    __raw_data_dir = None
+    __category_id_file_path = None
+    __analysis_res_dir = None
 
     @classmethod
     def api_key(cls):
-        if cls._api_key is None:
+        if cls.__api_key is None:
             cls.__process_arguments()
-        return cls._api_key
+        return cls.__api_key
 
     @classmethod
     def country_codes_path(cls):
-        if cls._country_codes_path is None:
+        if cls.__country_codes_path is None:
             cls.__process_arguments()
-        return cls._country_codes_path
+        return cls.__country_codes_path
 
     @classmethod
     def raw_data_dir(cls):
-        if cls._raw_data_dir is None:
+        if cls.__raw_data_dir is None:
             cls.__process_arguments()
-        return cls._raw_data_dir
+        return cls.__raw_data_dir
 
     @classmethod
     def category_id_file_path(cls):
-        if cls._category_id_file_path is None:
+        if cls.__category_id_file_path is None:
             cls.__process_arguments()
-        return cls._category_id_file_path
+        return cls.__category_id_file_path
+
+    @classmethod
+    def analysis_res_dir(cls):
+        if cls.__analysis_res_dir is None:
+            cls.__process_arguments()
+        return cls.__analysis_res_dir
 
     @classmethod
     def __process_arguments(cls):
@@ -43,26 +50,32 @@ class Args(object):
         parser.add_argument('--api_key',
                             help='Path to the file containing the api key, '
                                  'by default will use API_KEY value in .env',
-                            default=os.getenv('API_KEY'), )
+                            default=os.getenv('API_KEY'))
 
         parser.add_argument('--country_codes_path',
                             help='Path to the file containing the list of country codes to scrape, '
-                                 'by default will use COUNTRY_CODES_PATH value in .env',
-                            default=os.getenv('COUNTRY_CODES_PATH'))
+                                 'by default will use "country_codes.txt" value',
+                            default='country_codes.txt')
 
         parser.add_argument('--raw_data_dir',
                             help='Path to save the outputted files in, '
-                                 'by default will use RAW_DATA_DIR value in .env',
-                            default=os.getenv('RAW_DATA_DIR'))
+                                 'by default will use "resource/raw_data/" value',
+                            default=f'resource{os.sep}raw_data{os.sep}')
 
         parser.add_argument('--category_id_file_path',
                             help='Path to file containing categories naming and their id, '
-                                 'by default will use CATEGORY_ID_FILE_PATH value in .env',
-                            default=os.getenv('CATEGORY_ID_FILE_PATH'))
+                                 'by default will use "resource/category/US_category_id.json" value',
+                            default=f'resource{os.sep}category{os.sep}US_category_id.json')
+
+        parser.add_argument('--analysis_res_dir',
+                            help='Path to file containing result of data analysis, '
+                                 'by default will use "resource/analysis_result/" value',
+                            default=f'resource{os.sep}analysis_result')
 
         args = parser.parse_args()
 
-        cls._api_key = args.api_key
-        cls._country_codes_path = args.country_codes_path
-        cls._raw_data_dir = args.raw_data_dir
-        cls._category_id_file_path = args.category_id_file_path
+        cls.__api_key = args.api_key
+        cls.__country_codes_path = args.country_codes_path
+        cls.__raw_data_dir = args.raw_data_dir
+        cls.__category_id_file_path = args.category_id_file_path
+        cls.__analysis_res_dir = args.analysis_res_dir

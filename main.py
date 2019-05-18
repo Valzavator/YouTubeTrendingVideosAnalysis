@@ -1,31 +1,38 @@
+import os
+
 import numpy as np
 import pandas as pd
-import json
-
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 from database.database import Database
-from entity.video import YouTubeVideo
-from preprocessing_tool.data_processing import match_category_id_with_category_title, reformat_dataset
-from preprocessing_tool.scraper import YouTubeTrendingVideosScraper
-from util.args import Args
+import pycountry
 
-from util.file_processing import save_videos_data_into_csv, get_videos_data_from_csv
+# from entity.video import YouTubeVideo
+# from preprocessing_tool.data_processing import match_category_id_with_category_title, reformat_dataset
+import time
+from util.args import Args#
+# from util.file_processing import save_videos_data_into_csv, get_videos_data_from_csv
+from processing_tool.data_analysis import correlation
+from processing_tool.data_preprocessing import reformat_dataset
 from util.string_processing import prepare_feature
+from processing_tool.scraper import YouTubeTrendingVideosScraper
+from util.file_processing import get_videos_data_from_csv
 
 if __name__ == "__main__":
+    output_directory = f'{Args.analysis_res_dir()}\\all_country\\{time.strftime("%d.%m.%y")}\\'
+    # db = Database()
     # scraper = YouTubeTrendingVideosScraper()
-    # data = scraper.get_videos_data_by_country_codes(['UA'])
-
+    # data = scraper.get_videos_data_by_country_codes({'UA', 'US'})
+    #
+    # print(data)
     # match_category_id_with_category_title(data)
     # save_videos_data_into_csv(data)
     # for video in scraper.get_videos_data_by_country_codes(['UA']):
     #     print(video.__dict__)
-    db = Database()
-    print(len(db.get_videos_by_countries(['UA', 'US', 'CA', 'DE', 'FR', 'GB', 'IN'])))
+    # data = db.get_videos_by_countries(['US', 'CA', 'DE', 'FR', 'GB', 'IN'])
+    # print(len(data))
     # data = match_category_id_with_category_title(data)
-
+    #
     # reformat_dataset('resource/raw_data/USvideos.csv', 'US_videos.csv', 'US')
     # reformat_dataset('resource/raw_data/CAvideos.csv', 'CA_videos.csv', 'CA')
     # reformat_dataset('resource/raw_data/DEvideos.csv', 'DE_videos.csv', 'DE')
@@ -42,9 +49,17 @@ if __name__ == "__main__":
     #     'resource/raw_data/US_videos.csv',
     # )
     #
-    # print(len(data))
-    # print(db.save_many_videos(data))
+    # data = get_videos_data_from_csv(
+    #     'resource/raw_data/US_videos.csv',
+    # )
     #
+    # print(len(data))
+    #
+    # for d in data:
+    #     db.save_one_video(d)
+
+    # print(db.save_many_videos(data))
+
     # print(len(db.get_videos()))
 
 ###############
@@ -52,20 +67,17 @@ if __name__ == "__main__":
 #     'resource/raw_data/US_videos.csv',
 # )
 #
-# data = pd.DataFrame(dataset)
-
-# data.info()
-# data[['view_count','likes','dislikes','comment_count']].describe()
-
-# print(data.loc[(data['view_count'] == 0) | (data['likes'] == 0) | (data['dislikes'] == 0) | (
-#             data['comment_count'] == 0)].head().to_string())
-
-# correlation = data[['view_count', 'likes', 'dislikes', 'comment_count']].corr()
-# plot = sns.heatmap(correlation, cmap='Blues', annot=True)
-# figure = plot.get_figure()
-# figure.savefig('1.png')
-
-# plt.figure(figsize=(25, 9))
-# plot = sns.countplot(data['category'], order=data['category'].value_counts().index)
-# figure = plot.get_figure()
-# figure.savefig('2.png')
+    # df = pd.DataFrame(data)
+    # print(df.head(5).to_string())
+    # df.info()
+    # df[['view_count','likes','dislikes','comment_count']].describe()
+    # #
+    # print(df.loc[(df['view_count'] == 0) | (df['likes'] == 0) | (df['dislikes'] == 0) | (
+    #             df['comment_count'] == 0)].head().to_string())
+    #
+    # correlation(df)
+    #
+    # plt.figure(figsize=(25, 9))
+    # plot = sns.countplot(data['category'], order=data['category'].value_counts().index)
+    # figure = plot.get_figure()
+    # figure.savefig('2.png')

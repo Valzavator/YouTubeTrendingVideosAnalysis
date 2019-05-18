@@ -42,11 +42,6 @@ def get_videos_data_from_csv(*files) -> list:
 
     videos_data = pd.concat(data_frames).to_dict('records')
 
-    # Rename key "video_id" on "_id" for MongoDB
-    for video in videos_data:
-        if '_id' not in video:
-            video['_id'] = video.pop('video_id')
-
     return videos_data
 
 

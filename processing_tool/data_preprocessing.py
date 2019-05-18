@@ -37,7 +37,7 @@ def reformat_dataset(file_path: str, filename: str, country_code: str):
     data = match_category_id_with_category_title(data)
 
     for video in data:
-        video['_id'] = video['_id'] + video['trending_date']
+        video['_id'] = video['_id'] + video['trending_date'] + country_code
         video.pop('video_error_or_removed')
         video['country_code'] = f'"{country_code}"'
 

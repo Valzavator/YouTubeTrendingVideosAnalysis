@@ -1,3 +1,4 @@
+import pycountry
 import requests
 import sys
 import time
@@ -14,7 +15,7 @@ class YouTubeTrendingVideosScraper:
 
         self.__api_key = Args.api_key()
 
-    def get_videos_data_by_country_codes(self, country_codes: list) -> list:
+    def get_videos_data_by_country_codes(self, country_codes: set) -> list:
         countries_data = []
 
         for country_code in country_codes:
@@ -23,7 +24,14 @@ class YouTubeTrendingVideosScraper:
         return countries_data
 
     def get_videos_data_by_country_codes_from_file(self, file_path: str) -> list:
-        country_codes = get_data_from_file(file_path)
+        file_data = get_data_from_file(file_path)
+
+        country_codes = set()
+
+        for code in file_data:
+            code = str.upper(code)
+            if pycountry.countries.get(alpha_2=code) is not None:
+                country_codes.add(code)
 
         return self.get_videos_data_by_country_codes(country_codes)
 
@@ -58,7 +66,8 @@ class YouTubeTrendingVideosScraper:
 
         return request.json()
 
-    def __get_videos_data_by_page(self, items: list, country_code: str) -> list:
+    @staticmethod
+    def __get_videos_data_by_page(items: list, country_code: str) -> list:
         videos_data_by_page = []
 
         for video_raw_data in items:
@@ -102,7 +111,7 @@ class YouTubeTrendingVideosScraper:
                 video.comment_count = statistics['commentCount']
                 video.comments_disabled = False
 
-            video._id = prepare_feature(video_raw_data['id'] + video.trending_date)
+            video._id = prepare_feature(video_raw_data['id'] + video.trending_date + video.country_code)
 
             videos_data_by_page.append(video.__dict__)
 
