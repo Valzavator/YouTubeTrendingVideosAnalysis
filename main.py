@@ -1,25 +1,33 @@
-import os
+# import os
+#
+# # import numpy as np
+# # import pandas as pd
+# # import seaborn as sns
+# # import matplotlib.pyplot as plt
+# # from database.database import Database
+# # import pycountry
+#
+# # from entity.video import YouTubeVideo
+# # from preprocessing_tool.data_processing import match_category_id_with_category_title, reformat_dataset
+# import time
+# from util.args import Args#
+# # from util.file_processing import save_videos_data_into_csv, get_videos_data_from_csv
+# from processing_tool.data_analysis import correlation
+# from processing_tool.data_preprocessing import reformat_dataset
+# from util.string_processing import prepare_feature
+# from processing_tool.scraper import YouTubeTrendingVideosScraper
+# from util.file_processing import get_videos_data_from_csv
+import nltk
 
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from database.database import Database
-import pycountry
-
-# from entity.video import YouTubeVideo
-# from preprocessing_tool.data_processing import match_category_id_with_category_title, reformat_dataset
-import time
-from util.args import Args#
-# from util.file_processing import save_videos_data_into_csv, get_videos_data_from_csv
-from processing_tool.data_analysis import correlation
-from processing_tool.data_preprocessing import reformat_dataset
-from util.string_processing import prepare_feature
-from processing_tool.scraper import YouTubeTrendingVideosScraper
-from util.file_processing import get_videos_data_from_csv
+# nltk.download()
 
 if __name__ == "__main__":
-    output_directory = f'{Args.analysis_res_dir()}\\all_country\\{time.strftime("%d.%m.%y")}\\'
+    pass
+
+
+
+
+    # output_directory = f'{Args.analysis_res_dir()}\\all_country\\{time.strftime("%d.%m.%y")}\\'
     # db = Database()
     # scraper = YouTubeTrendingVideosScraper()
     # data = scraper.get_videos_data_by_country_codes({'UA', 'US'})

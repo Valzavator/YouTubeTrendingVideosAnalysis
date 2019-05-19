@@ -98,17 +98,17 @@ class YouTubeTrendingVideosScraper:
             video.thumbnail_link = snippet.get("thumbnails", dict()).get("default", dict()).get("url", "")
             video.trending_date = time.strftime("%y.%d.%m")
             video.tags = get_tags(snippet.get("tags", "[none]"))
-            video.view_count = statistics.get("viewCount", 0)
+            video.view_count = int(statistics.get("viewCount", 0))
 
             # This may be unclear, essentially the way the API works is that if a video has comments or ratings disabled
             # then it has no feature for it, thus if they don't exist in the statistics dict we know they are disabled
             if 'likeCount' in statistics and 'dislikeCount' in statistics:
-                video.likes = statistics['likeCount']
-                video.dislikes = statistics['dislikeCount']
+                video.likes = int(statistics['likeCount'])
+                video.dislikes = int(statistics['dislikeCount'])
                 video.ratings_disabled = False
 
             if 'commentCount' in statistics:
-                video.comment_count = statistics['commentCount']
+                video.comment_count = int(statistics['commentCount'])
                 video.comments_disabled = False
 
             video._id = prepare_feature(video_raw_data['id'] + video.trending_date + video.country_code)

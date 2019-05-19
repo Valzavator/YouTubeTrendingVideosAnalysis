@@ -12,7 +12,7 @@ class YouTubeTrendingAnalysisApplication(Form):
     def __init__(self):
         self.__db = Database()
 
-        self.__codes_config = CountryCodesConfigForm(self)
+        self.__codes_config = CountryCodesConfigForm(self, self.__db)
         self.__database_management = DatabaseManagementForm(self, self.__db, self.__codes_config.country_codes)
         self.__analyze_data = AnalyzeDataForm(self, self.__db, self.__codes_config.country_codes)
 
@@ -31,6 +31,7 @@ class YouTubeTrendingAnalysisApplication(Form):
                 self.__database_management.launch()
 
             elif choice == '3':
+                self.__analyze_data.country_codes = self.__codes_config.country_codes
                 self.__analyze_data.launch()
 
             elif choice == '0':

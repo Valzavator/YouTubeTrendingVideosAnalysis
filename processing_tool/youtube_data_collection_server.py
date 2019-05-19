@@ -2,8 +2,8 @@ from datetime import datetime, date, time
 import time as t
 
 from database.database import Database
-from preprocessing_tool.data_preprocessing import match_category_id_with_category_title
-from preprocessing_tool.scraper import YouTubeTrendingVideosScraper
+from processing_tool.data_preprocessing import match_category_id_with_category_title
+from processing_tool.scraper import YouTubeTrendingVideosScraper
 from util.args import Args
 from util.file_processing import save_videos_data_into_csv
 
@@ -14,7 +14,7 @@ class YouTubeDataCollectionServer(object):
         self.db = Database()
         self.scraper = YouTubeTrendingVideosScraper()
 
-    def launch(self, scrap_time=datetime.combine(date.today(), time(10, 25)),
+    def launch(self, scrap_time=datetime.combine(date.today(), time(10, 45)),
                country_codes_path=Args.country_codes_path()):
 
         print(country_codes_path)

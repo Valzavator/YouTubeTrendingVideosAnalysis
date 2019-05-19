@@ -54,7 +54,10 @@ class Database:
     def get_all_videos(self) -> Cursor:
         return self.__videos_coll.find()
 
-    def get_videos_by_countries(self, country_codes: list) -> Cursor:
+    def get_videos_by_country_code(self, country_code: str) -> Cursor:
+        return self.__videos_coll.find({'country_code': country_code})
+
+    def get_videos_by_country_codes(self, country_codes: list) -> Cursor:
         return self.__videos_coll.find({'country_code': {'$in': country_codes}})
 
     def remove_all_documents(self):
@@ -62,6 +65,9 @@ class Database:
 
     def count(self):
         return self.__videos_coll.count()
+
+    def get_all_country_codes(self) -> list:
+        return list(self.__videos_coll.distinct('country_code'))
 
     def close(self):
         self.__client.close()

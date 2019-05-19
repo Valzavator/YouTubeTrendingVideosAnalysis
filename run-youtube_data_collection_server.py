@@ -1,4 +1,4 @@
-from preprocessing_tool.youtube_data_collection_server import YouTubeDataCollectionServer
+from processing_tool.youtube_data_collection_server import YouTubeDataCollectionServer
 
 
 def main():

@@ -3,14 +3,17 @@ import os
 import pycountry
 
 from cli.form import Form
+from database.database import Database
 from util.file_processing import get_data_from_file
 from util.args import Args
 
 
 class CountryCodesConfigForm(Form):
 
-    def __init__(self, parent: Form):
+    def __init__(self, parent: Form, database: Database):
         self.__parent = parent
+        self.__db = database
+
         self.__country_codes = set()
         self.__country_codes.add('US')
 
@@ -26,12 +29,15 @@ class CountryCodesConfigForm(Form):
                 self.__add_country_codes_from_file()
 
             elif choice == '3':
-                self.__remove_country_codes()
+                self.__add__country_codes_from_database()
 
             elif choice == '4':
-                self.__remove_all_country_codes()
+                self.__remove_country_codes()
 
             elif choice == '5':
+                self.__remove_all_country_codes()
+
+            elif choice == '6':
                 self.__list_of_country_codes()
 
             elif choice == '0':
@@ -40,7 +46,7 @@ class CountryCodesConfigForm(Form):
             else:
                 print(">>> Wrong option selection!")
 
-            if loop and choice in ['2', '5']:
+            if loop and choice in ['2', '6']:
                 input(">>> Press Enter to continue...")
 
     def __add_new_country_codes(self):
@@ -49,16 +55,6 @@ class CountryCodesConfigForm(Form):
         codes = [code.strip() for code in str.split(str_codes, sep=',')]
 
         self.__add_country_codes(codes)
-
-    def __remove_country_codes(self):
-        os.system('cls')
-        str_codes = input('Enter country codes to remove(delimiter = ","):\n')
-        codes = [str.upper(code.strip()) for code in str.split(str_codes, sep=',')]
-
-        self.__country_codes = self.__country_codes.difference(set(codes))
-
-    def __remove_all_country_codes(self):
-        self.__country_codes.clear()
 
     def __add_country_codes_from_file(self):
         os.system('cls')
@@ -73,6 +69,21 @@ class CountryCodesConfigForm(Form):
         except FileNotFoundError as e:
             print(f'{e.strerror}: "{e.filename}"')
 
+    def __add__country_codes_from_database(self):
+        codes = self.__db.get_all_country_codes()
+
+        self.__add_country_codes(codes)
+
+    def __remove_country_codes(self):
+        os.system('cls')
+        str_codes = input('Enter country codes to remove(delimiter = ","):\n')
+        codes = [str.upper(code.strip()) for code in str.split(str_codes, sep=',')]
+
+        self.__country_codes = self.__country_codes.difference(set(codes))
+
+    def __remove_all_country_codes(self):
+        self.__country_codes.clear()
+
     @staticmethod
     def __list_of_country_codes():
         for country in pycountry.countries:
@@ -83,10 +94,11 @@ class CountryCodesConfigForm(Form):
         print('\n', 21 * '-', 'CONFIGURE COUNTY CODES MENU', 21 * '-', '\n')
         print('>>> Your country codes: ', list(self.__country_codes), '\n')
         print('1. Add new country codes')
-        print('2. Add codes from file')
-        print('3. Remove some country codes')
-        print('4. Remove all codes')
-        print('5. [HELP] List of country codes')
+        print('2. Add country codes from file')
+        print('3. Get all country codes from database')
+        print('4. Remove some country codes')
+        print('5. Remove all codes')
+        print('6. [HELP] List of country codes')
         print('0. Back')
         print('\n', 70 * '-', '\n')
 

@@ -20,7 +20,7 @@ def write_to_file(output_dir, file_name, data):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    with open(output_dir + file_name, "w+",
+    with open(os.path.join(output_dir, file_name), "w+",
               encoding='utf-8') as file:
         for row in data:
             file.write(f"{row}\n")
@@ -49,7 +49,6 @@ def save_videos_data_into_csv(
         videos_data: list,
         file_name=f"{time.strftime('%d-%m-%y_%H.%M.%S')}_videos.csv",
         output_dir=Args.raw_data_dir()):
-
     if videos_data is None:
         raise ValueError('Videos data can`t be None!')
 

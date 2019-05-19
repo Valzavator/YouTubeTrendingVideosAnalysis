@@ -2,6 +2,7 @@ import os
 
 from cli.form import Form
 from database.database import Database
+from processing_tool.data_preprocessing import match_category_id_with_category_title
 from processing_tool.scraper import YouTubeTrendingVideosScraper
 from util.file_processing import get_videos_data_from_csv
 
@@ -18,14 +19,14 @@ class DatabaseManagementForm(Form):
         loop = True
         while loop:
             self.__print__menu()
-            choice = input(">>> Enter your choice [0-3]: ")
+            choice = input(">>> Enter your choice [0-2,9]: ")
             if choice == '1':
                 self.__load_from_youtube()
 
             elif choice == '2':
                 self.__load_from_datasets()
 
-            elif choice == '3':
+            elif choice == '9':
                 self.__remove_all_documents()
 
             elif choice == '0':
@@ -39,17 +40,20 @@ class DatabaseManagementForm(Form):
 
     def __load_from_youtube(self):
         os.system('cls')
+        print('Please, wait...')
 
         if len(self.__country_codes) == 0:
             print('Please, choose some country codes!')
             return
 
         data = self.__scraper.get_videos_data_by_country_codes(self.__country_codes)
-        print(f'Download {len(data)} documents from YouTube Data API.')
+        match_category_id_with_category_title(data)
+
+        print(f'\nDownload {len(data)} documents from YouTube Data API.')
 
         count_of_stored_doc = self.__db.save_many_videos(data)
 
-        print(f'{count_of_stored_doc} unique documents were stored in the database.')
+        print(f'{count_of_stored_doc} unique documents were stored in the database.\n')
 
     def __load_from_datasets(self):
         os.system('cls')
