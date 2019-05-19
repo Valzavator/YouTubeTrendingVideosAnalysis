@@ -2,6 +2,7 @@
   <dictionary name="Valzavator">
     <words>
       <w>datasets</w>
+      <w>preprocessing</w>
     </words>
   </dictionary>
 </component>

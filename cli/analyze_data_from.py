@@ -7,7 +7,8 @@ from pandas import DataFrame
 
 from cli.form import Form
 from database.database import Database
-from processing_tool.data_analysis import correlation
+from processing_tool.data_analysis import correlation, category_rating, distribution_boxplot, distribution_plot, \
+    distribution_of_days, distribution_of_days_preprocessing, fastest_grow_among_categories, top_channels
 from util.args import Args
 
 
@@ -42,7 +43,15 @@ class AnalyzeDataForm(Form):
                 input(">>> Press Enter to continue...")
 
     def __general_analysis(self):
-        pass
+        data = self.__db.get_videos_by_countries(list(self.__country_codes))
+
+        data_frame = pd.DataFrame(data)
+        #
+        # data = distribution_of_days_preprocessing(data_frame)
+        # print(data.head(10).to_string())
+
+        # fastest_grow_among_categories(data_frame)
+        top_channels(data_frame, 10)
 
     def __detailed_analysis_for_each_country_separately(self):
         for code in self.__country_codes:
@@ -58,7 +67,7 @@ class AnalyzeDataForm(Form):
                 Args.analysis_res_dir(),
                 f'{code}{os.sep}{time.strftime("%d.%m.%y")}{os.sep}')
 
-            self.__detailed_analysis_for_data(data_frame,output_directory)
+            self.__detailed_analysis_for_data(data_frame, output_directory)
 
         subprocess.Popen(f'explorer /select, {Args.analysis_res_dir()}{os.sep}')
 
@@ -81,6 +90,10 @@ class AnalyzeDataForm(Form):
     @staticmethod
     def __detailed_analysis_for_data(data_frame: DataFrame, output_dir):
         correlation(data_frame, output_dir)
+        category_rating(data_frame, output_dir)
+        distribution_boxplot(data_frame, output_dir)
+        distribution_plot(data_frame, output_dir)
+        distribution_of_days(data_frame, output_dir)
 
     def __print__menu(self):
         os.system('cls')
