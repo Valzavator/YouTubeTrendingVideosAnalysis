@@ -27,7 +27,7 @@ class YouTubeDataCollectionServer(object):
 
             print(f'>>> Next scrap will be {scrap_time.strftime("%Y.%m.%d-%H:%M:%S")}')
 
-            t.sleep(delta_time.seconds)
+            t.sleep(1800)
 
             new_data = match_category_id_with_category_title(
                 self.scraper.get_videos_data_by_country_codes_from_file(country_codes_path))

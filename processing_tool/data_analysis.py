@@ -1,5 +1,10 @@
 import os
+import re
+
+import nltk
+from nltk import word_tokenize
 from nltk.corpus import stopwords
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 from wordcloud import WordCloud, STOPWORDS
 
@@ -161,6 +166,8 @@ def distribution_of_days(data: DataFrame, output_dir=Args.analysis_res_dir()):
     plt.figure(figsize=(25, 9))
 
     plot = sns.countplot(data['interval'])
+    plt.title('Distribution of interval')
+
     __save_figure(plot.get_figure(), output_dir, 'distribution_of_days.png')
     plt.close()
 
@@ -311,43 +318,61 @@ def __create_and_save_word_cloud(
     plt.savefig(os.path.join(output_dir, filename), facecolor='k', bbox_inches='tight')
     plt.close()
 
-# def sentiment_analysis(data: DataFrame, output_dir=Args.analysis_res_dir()):
-#     category_list = data['category'].unique()
-#
-#     # Collect all the related stopwords.
-#     en_stopwords = list(stopwords.words('english'))
-#     de_stopwords = list(stopwords.words('german'))
-#     fr_stopwords = list(stopwords.words('french'))
-#     ru_stopwords = list(stopwords.words('russian'))
-#
-#     en_stopwords.extend(de_stopwords)
-#     en_stopwords.extend(fr_stopwords)
-#     en_stopwords.extend(ru_stopwords)
-#
-#     polarities = list()
-#     MAX_N = 1000
-#
-#     for i in category_list:
-#         tags_word = data[data['category'] == i]['tags'].str.lower().str.cat(sep=' ')
-#
-#         # removes punctuation,numbers and returns list of words
-#         tags_word = re.sub('[^A-Za-z]+', ' ', tags_word)
-#         word_tokens = word_tokenize(tags_word)
-#         filtered_sentence = [w for w in word_tokens if not w in en_stopwords]
-#         without_single_chr = [word for word in filtered_sentence if len(word) > 2]
-#
-#         # Remove numbers
-#         cleaned_data_title = [word for word in without_single_chr if not word.isdigit()]
-#
-#         # Calculate frequency distribution
-#         word_dist = nltk.FreqDist(cleaned_data_title)
-#         hnhk = pd.DataFrame(word_dist.most_common(MAX_N),
-#                             columns=['Word', 'Frequency'])
-#         print(i)
-#         compound = .0
-#         for word in hnhk['Word'].head(MAX_N):
-#             compound += SentimentIntensityAnalyzer().polarity_scores(word)['compound']
-#
-#         polarities.append(compound)
-#
-#     print(polarities)
+
+def sentiment_analysis(data: DataFrame, output_dir=Args.analysis_res_dir()):
+    category_list = data['category'].unique()
+
+    # Collect all the related stopwords.
+    en_stopwords = list(stopwords.words('english'))
+    de_stopwords = list(stopwords.words('german'))
+    fr_stopwords = list(stopwords.words('french'))
+    ru_stopwords = list(stopwords.words('russian'))
+
+    en_stopwords.extend(de_stopwords)
+    en_stopwords.extend(fr_stopwords)
+    en_stopwords.extend(ru_stopwords)
+
+    polarities = list()
+    MAX_N = 10000
+
+    for i in category_list:
+        print(f'>> {i}')
+
+        tags_word = data[data['category'] == i]['tags'].str.lower().str.cat(sep=' ')
+
+        # removes punctuation,numbers and returns list of words
+        tags_word = re.sub('[^A-Za-z]+', ' ', tags_word)
+        word_tokens = word_tokenize(tags_word)
+        filtered_sentence = [w for w in word_tokens if not w in en_stopwords]
+        without_single_chr = [word for word in filtered_sentence if len(word) > 2]
+
+        # Remove numbers
+        cleaned_data_title = [word for word in without_single_chr if not word.isdigit()]
+
+        # Calculate frequency distribution
+        word_dist = nltk.FreqDist(cleaned_data_title)
+        hnhk = pd.DataFrame(word_dist.most_common(MAX_N),
+                            columns=['Word', 'Frequency'])
+        compound = .0
+        for word in hnhk['Word'].head(MAX_N):
+            compound += SentimentIntensityAnalyzer().polarity_scores(word)['compound']
+
+        polarities.append(compound)
+
+    category_list = pd.DataFrame(category_list)
+    polarities = pd.DataFrame(polarities)
+    tags_sentiment = pd.concat([category_list, polarities], axis=1)
+    tags_sentiment.columns = ['category', 'polarity']
+    tags_sentiment = tags_sentiment.sort_values('polarity').reset_index()
+
+    plt.figure(figsize=(18, 10))
+    sns.barplot(x=tags_sentiment['polarity'], y=tags_sentiment['category'], data=tags_sentiment)
+
+    plt.xlabel("Categories", fontsize=20)
+    plt.ylabel("Polarity", fontsize=20)
+    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=15)
+    plt.title("\nPolarity of Different Categories videos\n", fontsize=25)
+
+    __save_figure(plt, output_dir, 'polarity_of_categories.png')
+    plt.close()

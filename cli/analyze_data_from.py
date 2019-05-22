@@ -9,9 +9,6 @@ from pandas import DataFrame
 from cli.form import Form
 from database.database import Database
 import processing_tool.data_analysis as da
-# correlation, category_rating, distribution_boxplot, distribution_plot, \
-#     distribution_of_days, distribution_of_days_preprocessing, fastest_grow_among_categories, top_channels, \
-#     word_cloud_for_tags, word_cloud_for_titles, word_cloud_for_description
 from util.args import Args
 
 
@@ -32,13 +29,19 @@ class AnalyzeDataForm(Form):
                     self.__detailed_analysis_for_each_country_separately()
 
                 elif choice == '2':
-                    self.__detailed_analysis_for_all_countries()
+                    if len(self.__country_codes) > 1:
+                        self.__detailed_analysis_for_all_countries()
+                    elif len(self.__country_codes) == 1:
+                        self.__detailed_analysis_for_each_country_separately()
 
                 elif choice == '0':
                     loop = False
 
                 else:
                     print(">>> Wrong option selection!")
+
+                if loop:
+                    input(">>> Press Enter to continue...")
 
             except MemoryError:
                 print(">>> RAM overflow!")
@@ -49,6 +52,8 @@ class AnalyzeDataForm(Form):
     def __detailed_analysis_for_each_country_separately(self):
         os.system('cls')
         print('Please, wait...')
+
+        is_analyze = False
 
         for code in self.__country_codes:
 
@@ -62,6 +67,8 @@ class AnalyzeDataForm(Form):
             if data_frame.size == 0:
                 print(f'No data for analysis {code}!')
                 continue
+
+            is_analyze = True
 
             output_directory = os.path.join(
                 Args.analysis_res_dir(),
@@ -77,8 +84,9 @@ class AnalyzeDataForm(Form):
 
             del data_frame
 
-        os.startfile(Args.analysis_res_dir())
-        # subprocess.Popen(f'explorer /select, {Args.analysis_res_dir()}{os.sep}')
+        if is_analyze:
+            os.startfile(Args.analysis_res_dir())
+            # subprocess.Popen(f'explorer /select, {Args.analysis_res_dir()}{os.sep}')
 
     def __detailed_analysis_for_all_countries(self):
         os.system('cls')
@@ -180,7 +188,8 @@ class AnalyzeDataForm(Form):
             da.distribution_of_days,
             da.word_cloud_for_tags,
             da.word_cloud_for_titles,
-            da.word_cloud_for_description
+            da.word_cloud_for_description,
+            # da.sentiment_analysis
         ]
 
         i = 0

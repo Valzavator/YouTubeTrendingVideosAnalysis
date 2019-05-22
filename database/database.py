@@ -7,7 +7,7 @@ from pymongo.errors import DuplicateKeyError, BulkWriteError
 
 
 class Database:
-    def __init__(self, uri="mongodb://localhost:27017/"):
+    def __init__(self, uri="mongodb://localhost:27100/"):
         self.__client = MongoClient(uri)
 
         self.__db = self.__client["videos_analysis"]

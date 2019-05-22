@@ -6,12 +6,12 @@ load_dotenv()
 
 
 class Args(object):
-
     __api_key = None
     __country_codes_path = None
     __raw_data_dir = None
     __category_id_file_path = None
     __analysis_res_dir = None
+    __backup_db_dir = None
 
     @classmethod
     def api_key(cls):
@@ -44,6 +44,12 @@ class Args(object):
         return cls.__analysis_res_dir
 
     @classmethod
+    def backup_db_dir(cls):
+        if cls.__backup_db_dir is None:
+            cls.__process_arguments()
+        return cls.__backup_db_dir
+
+    @classmethod
     def __process_arguments(cls):
         parser = argparse.ArgumentParser()
 
@@ -72,6 +78,11 @@ class Args(object):
                                  'by default will use "resource/analysis_result/" value',
                             default=f'resource{os.sep}analysis_result')
 
+        parser.add_argument('--backup_db_dir',
+                            help='Path to file containing result of data analysis, '
+                                 'by default will use "resource/backup_database/" value',
+                            default=f'resource{os.sep}backup_database')
+
         args = parser.parse_args()
 
         cls.__api_key = args.api_key
@@ -79,3 +90,4 @@ class Args(object):
         cls.__raw_data_dir = args.raw_data_dir
         cls.__category_id_file_path = args.category_id_file_path
         cls.__analysis_res_dir = args.analysis_res_dir
+        cls.__backup_db_dir = args.backup_db_dir

@@ -1,10 +1,14 @@
 import os
+import subprocess
+
 
 from cli.form import Form
 from database.database import Database
 from processing_tool.data_preprocessing import match_category_id_with_category_title
 from processing_tool.scraper import YouTubeTrendingVideosScraper
+from util.args import Args
 from util.file_processing import get_videos_data_from_csv
+from requests.exceptions import ConnectionError
 
 
 class DatabaseManagementForm(Form):
@@ -15,16 +19,28 @@ class DatabaseManagementForm(Form):
         self.__country_codes = county_codes
         self.__scraper = YouTubeTrendingVideosScraper()
 
+        self.__mongodump_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongodump.exe"
+        self.__mongorestore_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongorestore.exe"
+
     def launch(self):
         loop = True
         while loop:
             self.__print__menu()
             choice = input(">>> Enter your choice [0-2,9]: ")
             if choice == '1':
-                self.__load_from_youtube()
+                try:
+                    self.__load_from_youtube()
+                except ConnectionError as e:
+                    print('Check connection to Internet!')
 
             elif choice == '2':
                 self.__load_from_datasets()
+
+            elif choice == '3':
+                self.__backup_database()
+
+            elif choice == '4':
+                self.__restore_database()
 
             elif choice == '9':
                 self.__remove_all_documents()
@@ -94,6 +110,27 @@ class DatabaseManagementForm(Form):
 
         print(f'\n>>> Total count: {total_count}\n')
 
+    def __backup_database(self):
+        os.system('cls')
+
+        if not os.path.exists(Args.backup_db_dir()):
+            os.makedirs(Args.backup_db_dir())
+
+        cns_command = f'"{self.__mongodump_path}" --collection videos --db videos_analysis' \
+            f' --out "{os.path.abspath(Args.backup_db_dir())}"'
+
+        subprocess.check_output(cns_command)
+
+    def __restore_database(self):
+        os.system('cls')
+
+        if not os.path.exists(Args.backup_db_dir()):
+            os.makedirs(Args.backup_db_dir())
+
+        cns_command = f'"{self.__mongorestore_path}" "{os.path.abspath(Args.backup_db_dir())}"'
+
+        subprocess.check_output(cns_command)
+
     def __remove_all_documents(self):
         os.system('cls')
         count_of_documents = self.__db.count()
@@ -111,6 +148,8 @@ class DatabaseManagementForm(Form):
         print('>>> Your country codes: ', list(self.__country_codes), '\n')
         print('1. Download from YouTube << for presentation only >>')
         print('2. Download from datasets')
-        print('3. Remove all documents in database')
+        print('3. Backup database')
+        print('4. Restore database')
+        print('9. Remove all documents in database')
         print('0. Back')
         print('\n', 70 * '-', '\n')
