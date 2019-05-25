@@ -1,19 +1,26 @@
 import datetime
+import os
+import subprocess
 
 import pymongo
 from pymongo import MongoClient
 from pymongo.cursor import Cursor
 from pymongo.errors import DuplicateKeyError, BulkWriteError
 
+from util.args import Args
+
 
 class Database:
-    def __init__(self, uri="mongodb://localhost:27100/"):
+    def __init__(self, uri=Args.db_uri()):
         self.__client = MongoClient(uri)
 
         self.__db = self.__client["videos_analysis"]
 
         self.__videos_coll = self.__db["videos"]
         self.__videos_coll.create_index([("county_code", pymongo.DESCENDING)])
+
+        self.__mongodump_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongodump.exe"
+        self.__mongorestore_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongorestore.exe"
 
     def __del__(self):
         self.close()
@@ -69,9 +76,22 @@ class Database:
     def get_all_country_codes(self) -> list:
         return list(self.__videos_coll.distinct('country_code'))
 
+    def backup_database(self):
+        if not os.path.exists(Args.backup_db_dir()):
+            os.makedirs(Args.backup_db_dir())
+
+        cns_command = f'"{self.__mongodump_path}" --collection videos --db videos_analysis' \
+            f' --out "{os.path.abspath(Args.backup_db_dir())}"'
+
+        subprocess.check_output(cns_command)
+
+    def restore_database(self):
+        if not os.path.exists(Args.backup_db_dir()):
+            os.makedirs(Args.backup_db_dir())
+
+        cns_command = f'"{self.__mongorestore_path}" "{os.path.abspath(Args.backup_db_dir())}"'
+
+        subprocess.check_output(cns_command)
+
     def close(self):
         self.__client.close()
-
-    # def select_database(self, database: str):
-    #     self.__db = self.__client[database]
-    #     self.__videos_coll = self.__db.videos

@@ -3,7 +3,6 @@ import os
 import time
 
 from util.args import Args
-from util.string_processing import prepare_feature_for_csv
 
 
 def get_data_from_file(file_path: str) -> list:
@@ -31,9 +30,8 @@ def get_videos_data_from_csv(*files) -> list:
 
     for file in files:
         try:
-            if file is None:
-                continue
-            data_frames.append(pd.read_csv(file))
+            if file is not None:
+                data_frames.append(pd.read_csv(file))
         except FileNotFoundError as e:
             print(e.strerror)
 
@@ -64,3 +62,6 @@ def save_videos_data_into_csv(
         output_dir,
         file_name,
         csv_data)
+
+
+from processing_tool.data_preprocessing import prepare_feature_for_csv

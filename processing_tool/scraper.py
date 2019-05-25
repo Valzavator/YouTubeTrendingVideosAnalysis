@@ -6,7 +6,7 @@ import time
 from entity.video import YouTubeVideo
 from util.args import Args
 from util.file_processing import get_data_from_file
-from util.string_processing import prepare_feature, get_tags
+from .data_preprocessing import prepare_feature, get_tags
 
 
 class YouTubeTrendingVideosScraper:

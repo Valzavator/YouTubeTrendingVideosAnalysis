@@ -6,12 +6,20 @@ load_dotenv()
 
 
 class Args(object):
+
+    __db_uri = None
     __api_key = None
     __country_codes_path = None
     __raw_data_dir = None
     __category_id_file_path = None
     __analysis_res_dir = None
     __backup_db_dir = None
+
+    @classmethod
+    def db_uri(cls):
+        if cls.__db_uri is None:
+            cls.__process_arguments()
+        return cls.__db_uri
 
     @classmethod
     def api_key(cls):
@@ -53,6 +61,11 @@ class Args(object):
     def __process_arguments(cls):
         parser = argparse.ArgumentParser()
 
+        parser.add_argument('--db_uri',
+                            help='URI used to connect to a MongoDB '
+                                 'by default will use "mongodb://localhost:27100/" value',
+                            default='mongodb://localhost:27017/')
+
         parser.add_argument('--api_key',
                             help='Path to the file containing the api key, '
                                  'by default will use API_KEY value in .env',
@@ -85,6 +98,7 @@ class Args(object):
 
         args = parser.parse_args()
 
+        cls.__db_uri = args.db_uri
         cls.__api_key = args.api_key
         cls.__country_codes_path = args.country_codes_path
         cls.__raw_data_dir = args.raw_data_dir

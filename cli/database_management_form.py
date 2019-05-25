@@ -113,23 +113,12 @@ class DatabaseManagementForm(Form):
     def __backup_database(self):
         os.system('cls')
 
-        if not os.path.exists(Args.backup_db_dir()):
-            os.makedirs(Args.backup_db_dir())
-
-        cns_command = f'"{self.__mongodump_path}" --collection videos --db videos_analysis' \
-            f' --out "{os.path.abspath(Args.backup_db_dir())}"'
-
-        subprocess.check_output(cns_command)
+        self.__db.backup_database()
 
     def __restore_database(self):
         os.system('cls')
 
-        if not os.path.exists(Args.backup_db_dir()):
-            os.makedirs(Args.backup_db_dir())
-
-        cns_command = f'"{self.__mongorestore_path}" "{os.path.abspath(Args.backup_db_dir())}"'
-
-        subprocess.check_output(cns_command)
+        self.__db.restore_database()
 
     def __remove_all_documents(self):
         os.system('cls')
