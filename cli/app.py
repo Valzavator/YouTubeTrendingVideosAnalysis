@@ -28,6 +28,7 @@ class YouTubeTrendingAnalysisApplication(Form):
                 self.__codes_config.launch()
 
             elif choice == '2':
+                self.__database_management.country_codes = self.__codes_config.country_codes
                 self.__database_management.launch()
 
             elif choice == '3':

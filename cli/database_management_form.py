@@ -6,7 +6,6 @@ from cli.form import Form
 from database.database import Database
 from processing_tool.data_preprocessing import match_category_id_with_category_title
 from processing_tool.scraper import YouTubeTrendingVideosScraper
-from util.args import Args
 from util.file_processing import get_videos_data_from_csv
 from requests.exceptions import ConnectionError
 
@@ -142,3 +141,11 @@ class DatabaseManagementForm(Form):
         print('9. Remove all documents in database')
         print('0. Back')
         print('\n', 70 * '-', '\n')
+
+    @property
+    def country_codes(self) -> set:
+        return self.__country_codes
+
+    @country_codes.setter
+    def country_codes(self, value: set):
+        self.__country_codes = value

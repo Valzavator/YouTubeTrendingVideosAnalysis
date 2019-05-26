@@ -155,20 +155,37 @@ def distribution_of_days_preprocessing(data: DataFrame):
     data['publish_date'] = data['published_at'].dt.date
     data['publish_time'] = data['published_at'].dt.time
     data['interval'] = (data['trending_date'].dt.date - data['publish_date']).astype('timedelta64[D]')
+    data['interval'] = data[data['interval'] < 40]['interval']
 
     return data
 
 
 # Histogram of distribution of interval
-def distribution_of_days(data: DataFrame, output_dir=Args.analysis_res_dir()):
+def distribution_of_days_histogram(data: DataFrame, output_dir=Args.analysis_res_dir()):
     data = distribution_of_days_preprocessing(data)
 
-    plt.figure(figsize=(25, 9))
+    plt.figure(figsize=(20, 9))
 
     plot = sns.countplot(data['interval'])
     plt.title('Distribution of interval')
 
-    __save_figure(plot.get_figure(), output_dir, 'distribution_of_days.png')
+    __save_figure(plot.get_figure(), output_dir, 'distribution_of_days_histogram.png')
+    plt.close()
+
+
+# Average time interval between published and trending
+def distribution_of_average_time(data: DataFrame, output_dir=Args.analysis_res_dir()):
+    data = distribution_of_days_preprocessing(data)
+
+    df_t = pd.DataFrame(data['interval'].groupby(data['category']).mean()).sort_values(by="interval")
+    plt.figure(figsize=(20, 9))
+    plt.plot(df_t, color='skyblue', linewidth=2)
+    plt.title("Average Days to be trending video", fontsize=20)
+    plt.xlabel('Category', fontsize=16)
+    plt.ylabel('Average Time Interval', fontsize=16)
+    plt.xticks(rotation=30)
+
+    __save_figure(plt, output_dir, 'distribution_of_average_time.png')
     plt.close()
 
 
