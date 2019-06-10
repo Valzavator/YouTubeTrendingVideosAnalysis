@@ -43,6 +43,7 @@ class YouTubeTrendingAnalysisApplication(Form):
                 print(">>> Wrong option selection!")
 
             if not loop:
+                os.system('cls')
                 print('>>> Bye, bye...')
 
     @staticmethod

@@ -1,7 +1,6 @@
 import json
 
 from util.args import Args
-from util.file_processing import get_videos_data_from_csv, save_videos_data_into_csv
 
 
 def match_category_id_with_category_title(videos_data: list, category_id_file_path=None) -> list:
@@ -25,14 +24,9 @@ def match_category_id_with_category_title(videos_data: list, category_id_file_pa
     return videos_data
 
 
-def reformat_dataset(file_path: str, filename: str, country_code: str):
-    if file_path is None:
-        raise ValueError('File path can`t be None!')
-
+def reformat_dataset(data: list, country_code: str) -> list:
     if country_code is None:
         raise ValueError('Country code can`t be None!')
-
-    data = get_videos_data_from_csv(file_path)
 
     data = match_category_id_with_category_title(data)
 
@@ -41,7 +35,7 @@ def reformat_dataset(file_path: str, filename: str, country_code: str):
         video.pop('video_error_or_removed')
         video['country_code'] = f'"{country_code}"'
 
-    save_videos_data_into_csv(data, filename)
+    return data
 
 
 def get_tags(tags_list):
@@ -61,14 +55,13 @@ def remove_unsafe_characters(string: str, unsafe_characters=None) -> str:
     return string
 
 
-def prepare_feature(feature: str, unsafe_characters=None) -> str:
+def prepare_feature(feature: str) -> str:
     feature = remove_unsafe_characters(feature)
 
     return f'{feature}'
 
 
-def prepare_feature_for_csv(feature: str, unsafe_characters=None) -> str:
+def prepare_feature_for_csv(feature: str) -> str:
     feature = remove_unsafe_characters(feature)
 
     return f'"{feature}"'
-

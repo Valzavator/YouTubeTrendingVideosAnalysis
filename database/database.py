@@ -1,6 +1,6 @@
-import datetime
 import os
 import subprocess
+from dotenv import load_dotenv
 
 import pymongo
 from pymongo import MongoClient
@@ -9,9 +9,11 @@ from pymongo.errors import DuplicateKeyError, BulkWriteError
 
 from util.args import Args
 
+load_dotenv()
+
 
 class Database:
-    def __init__(self, uri=Args.db_uri()):
+    def __init__(self, uri=Args.db_host()):
         self.__client = MongoClient(uri)
 
         self.__db = self.__client["videos_analysis"]
@@ -19,8 +21,8 @@ class Database:
         self.__videos_coll = self.__db["videos"]
         self.__videos_coll.create_index([("county_code", pymongo.DESCENDING)])
 
-        self.__mongodump_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongodump.exe"
-        self.__mongorestore_path = "C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongorestore.exe"
+        self.__mongodump_path = os.getenv('MONGODUMP_PATH')
+        self.__mongorestore_path = os.getenv('MONGORESTORE_PATH')
 
     def __del__(self):
         self.close()

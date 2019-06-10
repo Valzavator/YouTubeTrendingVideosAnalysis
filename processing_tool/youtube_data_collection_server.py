@@ -14,20 +14,18 @@ class YouTubeDataCollectionServer(object):
         self.db = Database()
         self.scraper = YouTubeTrendingVideosScraper()
 
-    def launch(self, scrap_time=datetime.combine(date.today(), time(10, 45)),
-               country_codes_path=Args.country_codes_path()):
+    def launch(self, hours=23, minutes=30, country_codes_path=Args.country_codes_path()):
 
-        print(country_codes_path)
+        scrap_time = datetime.combine(date.today(), time(hours, minutes))
 
         while True:
-
             current_time = datetime.today()
             delta_time = (scrap_time - current_time)
             scrap_time = scrap_time.fromtimestamp(scrap_time.timestamp() + abs(delta_time.days) * 86400)
 
             print(f'>>> Next scrap will be {scrap_time.strftime("%Y.%m.%d-%H:%M:%S")}')
 
-            t.sleep(1800)
+            t.sleep(delta_time.seconds)
 
             new_data = match_category_id_with_category_title(
                 self.scraper.get_videos_data_by_country_codes_from_file(country_codes_path))
@@ -39,4 +37,3 @@ class YouTubeDataCollectionServer(object):
             print(f'>>> Saved {count} data videos to database!')
 
             save_videos_data_into_csv(new_data)
-

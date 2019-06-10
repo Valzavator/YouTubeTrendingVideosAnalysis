@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import time
+from processing_tool.data_preprocessing import prepare_feature_for_csv
 
 from util.args import Args
 
@@ -64,4 +65,3 @@ def save_videos_data_into_csv(
         csv_data)
 
 
-from processing_tool.data_preprocessing import prepare_feature_for_csv
