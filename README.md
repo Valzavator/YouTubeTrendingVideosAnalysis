@@ -24,6 +24,7 @@ YouTube сьогодні є найбільшим веб-сайтом для хо
 ---
 ОПИС ПРОГРАМНОГО ЗАБЕЗПЕЧЕННЯ
 ----
+
 ###Модульна організація програми:
 
 ![Modular program organization](/resource/analysis_result/example/program_organization.PNG "Modular program organization")
