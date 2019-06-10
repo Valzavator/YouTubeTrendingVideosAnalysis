@@ -1,0 +1,492 @@
+-------------------- GENERAL INFORMATION --------------------
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 73441 entries, 0 to 73440
+Data columns (total 16 columns):
+_id                  73441 non-null object
+category             73441 non-null object
+channel_title        73441 non-null object
+comment_count        73441 non-null int64
+comments_disabled    73441 non-null bool
+country_code         73441 non-null object
+description          72440 non-null object
+dislikes             73441 non-null int64
+likes                73441 non-null int64
+published_at         73441 non-null object
+ratings_disabled     73441 non-null bool
+tags                 73441 non-null object
+thumbnail_link       73441 non-null object
+title                73441 non-null object
+trending_date        73441 non-null object
+view_count           73441 non-null int64
+dtypes: bool(2), int64(4), object(10)
+memory usage: 5.2+ MB
+
+ -------------------- GENERAL VIEW OF THE FOUR NUMERIC ATTRIBUTES --------------------
+
+         view_count         likes      dislikes  comment_count
+count  7.344100e+04  7.344100e+04  7.344100e+04   7.344100e+04
+mean   2.035440e+06  6.331659e+04  3.043024e+03   7.046770e+03
+std    6.209844e+06  1.909503e+05  2.254485e+04   2.953221e+04
+min    5.490000e+02  0.000000e+00  0.000000e+00   0.000000e+00
+25%    2.240310e+05  4.893000e+03  1.860000e+02   5.650000e+02
+50%    6.262480e+05  1.642000e+04  5.800000e+02   1.702000e+03
+75%    1.639189e+06  4.939300e+04  1.733000e+03   5.146000e+03
+max    2.252119e+08  5.613827e+06  1.674420e+06   1.361580e+06
+
+ -------------------- DISTRIBUTION OF DAYS THAT VIDEOS TAKE TO BECOME POPULAR --------------------
+
+count    72768.00000
+mean         6.74104
+std          4.85434
+min          0.00000
+25%          3.00000
+50%          6.00000
+75%          9.00000
+max         39.00000
+Name: interval, dtype: float64
+
+ -------------------- TOP VIDEOS WHOSE << VIEW_COUNT >> GROW FASTEST AMONG CATEGORIES --------------------
+
+                                                                                                   channel_title  growth_rate_view
+category              title                                                                                                       
+Autos & Vehicles      Official Jeep Super Bowl Commercial | Jeep Jura...                                    Jeep      4.978994e+06
+                      Official Ram Trucks Super Bowl Commercial | Ice...                              Ram Trucks      4.198858e+06
+                      Official Ram Trucks Super Bowl Commercial | Ice...                              Ram Trucks      4.198858e+06
+                      Official Jeep Super Bowl Commercial | Jeep Jura...                                    Jeep      3.645516e+06
+                      Official Ram Trucks Super Bowl Commercial | Ice...                              Ram Trucks      3.601358e+06
+Comedy                Musical Genre Challenge with Ariana Grande          The Tonight Show Starring Jimmy Fallon      3.586482e+06
+                      Mean Tweets – Avengers Edition                                           Jimmy Kimmel Live      2.917271e+06
+                      Mean Tweets – Avengers Edition                                           Jimmy Kimmel Live      2.610739e+06
+                      Anitta & J Balvin - Downtown (Official Lyric Vi...                               Lele Pons      2.535175e+06
+                      Anitta & J Balvin - Downtown (Official Lyric Vi...                               Lele Pons      2.392043e+06
+Education             Why Are 96,000,000 Black Balls on This Reservoir?                               Veritasium      2.899671e+06
+                      Why Are 96,000,000 Black Balls on This Reservoir?                               Veritasium      2.639965e+06
+                      Is Meat Bad for You? Is Meat Unhealthy?                         Kurzgesagt – In a Nutshell      1.336377e+06
+                      The Deadliest Being on Planet Earth – The Bacte...              Kurzgesagt – In a Nutshell      1.155084e+06
+                      The Deadliest Being on Planet Earth – The Bacte...              Kurzgesagt – In a Nutshell      1.148628e+06
+Entertainment         YouTube Rewind: The Shape of 2017 | #YouTubeRewind                       YouTube Spotlight      2.018231e+07
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind                       YouTube Spotlight      1.899237e+07
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind                       YouTube Spotlight      1.897911e+07
+                      Marvel Studios' Avengers: Infinity War Official...                    Marvel Entertainment      1.886814e+07
+                      Marvel Studios' Avengers: Infinity War Official...                    Marvel Entertainment      1.878909e+07
+Film & Animation      Incredibles 2 - Olympics Sneak Peek                                           Disney•Pixar      5.516977e+06
+                      Westworld Season 2 | Official Super Bowl LII Ad...                                     HBO      5.192874e+06
+                      Incredibles 2 - Olympics Sneak Peek                                           Disney•Pixar      5.170079e+06
+                      Incredibles 2 - Olympics Sneak Peek                                           Disney•Pixar      5.048018e+06
+                      Bumblebee (2018) - Official Teaser Trailer - Pa...                      Paramount Pictures      4.994304e+06
+Gaming                See You Later, Builder Base! (Builder Hall 9 | ...                          Clash of Clans      5.861468e+06
+                      YouTube Live at E3 2018: Monday with Ninja, Mar...                               gameslice      3.483553e+06
+                      Nintendo @ E3 2018: Day 1                                                         Nintendo      3.238183e+06
+                      Nintendo @ E3 2018: Day 1                                                         Nintendo      3.238183e+06
+                      Clash Royale: Meet the Rascals! (New Card!)                                   Clash Royale      3.224963e+06
+Howto & Style         42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE                           5-Minute Crafts      6.017325e+06
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE                           5-Minute Crafts      6.017325e+06
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE                           5-Minute Crafts      5.675913e+06
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE                           5-Minute Crafts      5.675913e+06
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE                           5-Minute Crafts      5.099487e+06
+Music                 BTS (방탄소년단) 'FAKE LOVE' Official MV                                                ibighit      2.093213e+07
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                                ibighit      1.967496e+07
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                                ibighit      1.634904e+07
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                                ibighit      1.469263e+07
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                                ibighit      1.345634e+07
+News & Politics       WATCH: The super blue blood moon makes first ap...                            PBS NewsHour      2.428832e+06
+                      Michigan Meteor Jan 16 2018                                                    Mike Austin      1.812224e+06
+                      WATCH: The super blue blood moon makes first ap...                            PBS NewsHour      1.784855e+06
+                      WATCH: The super blue blood moon makes first ap...                            PBS NewsHour      1.784855e+06
+                      Michigan Meteor Jan 16 2018                                                    Mike Austin      1.603954e+06
+Nonprofits & Activism Suicide: Be Here Tomorrow.                                                Logan Paul Vlogs      5.269446e+06
+                      Suicide: Be Here Tomorrow.                                                Logan Paul Vlogs      4.773128e+06
+                      Suicide: Be Here Tomorrow.                                                Logan Paul Vlogs      4.220887e+06
+                      Suicide: Be Here Tomorrow.                                                Logan Paul Vlogs      4.020985e+06
+                      Suicide: Be Here Tomorrow.                                                Logan Paul Vlogs      3.731276e+06
+People & Blogs        To Our Daughter                                                               Kylie Jenner      1.194357e+07
+                      To Our Daughter                                                               Kylie Jenner      1.046090e+07
+                      To Our Daughter                                                               Kylie Jenner      1.020036e+07
+                      To Our Daughter                                                               Kylie Jenner      8.963622e+06
+                      we broke up                                                                   David Dobrik      8.442486e+06
+Pets & Animals        BITTEN by a GIANT DESERT CENTIPEDE!                                       Brave Wilderness      1.072457e+06
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                       Brave Wilderness      1.072457e+06
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                       Brave Wilderness      1.038940e+06
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                       Brave Wilderness      1.038940e+06
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                       Brave Wilderness      1.030270e+06
+Science & Technology  Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                             AsapSCIENCE      5.947422e+06
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                             AsapSCIENCE      5.880738e+06
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                             AsapSCIENCE      5.474032e+06
+                      Falcon Heavy Test Flight                                                            SpaceX      5.291222e+06
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                             AsapSCIENCE      5.021125e+06
+Shows                 Game of Zones - S5:E5: The Isle of Van Gundy                               Bleacher Report      2.551770e+05
+                      Game of Zones - S5:E5: The Isle of Van Gundy                               Bleacher Report      2.327435e+05
+                      Game of Zones - S5:E5: The Isle of Van Gundy                               Bleacher Report      2.327435e+05
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                         Bleacher Report      2.228115e+05
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                         Bleacher Report      2.228115e+05
+Sports                India vs Australia - Match Highlights | ICC Cri...                                     ICC      5.100438e+06
+                      Fergie Performs The U.S. National Anthem / 2018...                          MLG Highlights      4.882530e+06
+                      Real Life Trick Shots 2 | Dude Perfect                                        Dude Perfect      4.307150e+06
+                      Fergie Performs The U.S. National Anthem / 2018...                          MLG Highlights      4.257568e+06
+                      Real Life Trick Shots 2 | Dude Perfect                                        Dude Perfect      4.175175e+06
+Travel & Events       Turkish Airlines - 5 Senses with Dr. Oz                                   Turkish Airlines      2.991553e+06
+                      Turkish Airlines - 5 Senses with Dr. Oz                                   Turkish Airlines      2.991553e+06
+                      Turkish Airlines - 5 Senses with Dr. Oz                                   Turkish Airlines      2.859288e+06
+                      Turkish Airlines - 5 Senses with Dr. Oz                                   Turkish Airlines      2.859288e+06
+                      Turkish Airlines - 5 Senses with Dr. Oz                                   Turkish Airlines      2.705020e+06
+
+ -------------------- TOP VIDEOS WHOSE << LIKES >> GROW FASTEST AMONG CATEGORIES --------------------
+
+                                                                                                 channel_title  growth_rate_like
+category              title                                                                                                     
+Autos & Vehicles      NISSAN GTR - Everything You Need to Know | Up t...                           Donut Media      1.860700e+04
+                      DELIT DE FUITE - le Justicier de Noël                                           CHRIS-RS      1.189986e+04
+                      DELIT DE FUITE - le Justicier de Noël                                           CHRIS-RS      1.147683e+04
+                      DELIT DE FUITE - le Justicier de Noël                                           CHRIS-RS      1.141775e+04
+                      I Built a FULL SIZE Tie Fighter/Silencer                                      colinfurze      1.090350e+04
+Comedy                Anitta & J Balvin - Downtown (Official Lyric Vi...                             Lele Pons      2.026860e+05
+                      Anitta & J Balvin - Downtown (Official Lyric Vi...                             Lele Pons      1.933577e+05
+                      Anitta & J Balvin - Downtown (Official Lyric Vi...                             Lele Pons      1.620072e+05
+                      CONFRONTING MY DAD                                                                 shane      1.476383e+05
+                      THRIFTING BRANDS!! GOODWILL WITH GREATLIZA.                                   Liza Koshy      1.470850e+05
+Education             EARFQUAKE                                                             Tyler, The Creator      1.016937e+05
+                      The Deadliest Being on Planet Earth – The Bacte...            Kurzgesagt – In a Nutshell      8.178800e+04
+                      Is Meat Bad for You? Is Meat Unhealthy?                       Kurzgesagt – In a Nutshell      8.107350e+04
+                      EARFQUAKE                                                             Tyler, The Creator      7.889400e+04
+                      EARFQUAKE                                                             Tyler, The Creator      7.451940e+04
+Entertainment         Marvel Studios' Avengers: Infinity War Official...                  Marvel Entertainment      8.679475e+05
+                      Marvel Studios' Avengers: Infinity War Official...                  Marvel Entertainment      7.192423e+05
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind                     YouTube Spotlight      6.305997e+05
+                      Marvel Studios' Avengers: Infinity War Official...                  Marvel Entertainment      5.828378e+05
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind                     YouTube Spotlight      5.745925e+05
+Film & Animation      Incredibles 2 - Olympics Sneak Peek                                         Disney•Pixar      1.431880e+05
+                      Selena Gomez - Back To You (Lyric Video)                                    Selena Gomez      1.365833e+05
+                      Incredibles 2 - Olympics Sneak Peek                                         Disney•Pixar      1.220150e+05
+                      Incredibles 2 - Olympics Sneak Peek                                         Disney•Pixar      1.218467e+05
+                      My Weird Trip to the UK                                                Jaiden Animations      1.217660e+05
+Gaming                Cyberpunk 2077 — Official E3 2019 Cinematic Tra...                        Cyberpunk 2077      1.802855e+05
+                      See You Later, Builder Base! (Builder Hall 9 | ...                        Clash of Clans      1.105460e+05
+                      Pokémon: Let's Go, Pikachu! and Pokémon: Let's ...  The Official Pokémon YouTube channel      9.503950e+04
+                      LOOK AT WHAT HE TURNED ME INTO... (ft. James Ch...                              FaZe Rug      8.994400e+04
+                      Super Smash Bros - Trailer Analysis                                      videogamedunkey      8.930350e+04
+Howto & Style         Rihanna's Epic 10-Minute Guide to Going Out Mak...                                 Vogue      1.351200e+05
+                      Rihanna's Epic 10-Minute Guide to Going Out Mak...                                 Vogue      1.273393e+05
+                      Rihanna's Epic 10-Minute Guide to Going Out Mak...                                 Vogue      1.108035e+05
+                      Jawbreaker 🍭 Palette & Summer 2019 Collection R...                           jeffreestar      1.002908e+05
+                      Rihanna's Epic 10-Minute Guide to Going Out Mak...                                 Vogue      9.812580e+04
+Music                 BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit      1.940036e+06
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit      1.490296e+06
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit      1.187561e+06
+                      BTS (방탄소년단) 'MIC Drop (Steve Aoki Remix)' Offic...                               ibighit      1.027568e+06
+                      j-hope 'Daydream (백일몽)' MV                                                       ibighit      1.025264e+06
+News & Politics       We Should Talk About What James Harrison Did...                          Philip DeFranco      4.190000e+04
+                      We Should Talk About What James Harrison Did...                          Philip DeFranco      3.290350e+04
+                      We Should Talk About What James Harrison Did...                          Philip DeFranco      2.732620e+04
+                      We Should Talk About What James Harrison Did...                          Philip DeFranco      2.732620e+04
+                      2017, in 7 minutes                                                                   Vox      2.501050e+04
+Nonprofits & Activism Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs      5.837440e+05
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs      5.418007e+05
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs      4.455622e+05
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs      3.735220e+05
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs      3.199968e+05
+People & Blogs        we broke up                                                                 David Dobrik      6.833680e+05
+                      we broke up                                                                 David Dobrik      5.118810e+05
+                      we broke up                                                                 David Dobrik      4.393222e+05
+                      we broke up                                                                 David Dobrik      3.738982e+05
+                      we broke up                                                                 David Dobrik      3.279840e+05
+Pets & Animals        BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness      5.427750e+04
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness      4.272500e+04
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness      3.859625e+04
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness      3.859625e+04
+                      The Smallest Bird you have ever seen                               A Chick Called Albert      3.351733e+04
+Science & Technology  Falcon Heavy Test Flight                                                          SpaceX      1.001030e+05
+                      Falcon Heavy Test Flight                                                          SpaceX      9.972400e+04
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE      9.827650e+04
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE      9.291433e+04
+                      World's LARGEST JELLO POOL- Can you swim in Jello?                            Mark Rober      9.162250e+04
+Shows                 Game of Zones - Game of Zones - S5:E1: 'A Golde...                       Bleacher Report      8.035667e+03
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                       Bleacher Report      6.577500e+03
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                       Bleacher Report      6.577500e+03
+                      Game of Zones - S5:E5: The Isle of Van Gundy                             Bleacher Report      6.227000e+03
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                       Bleacher Report      5.683200e+03
+Sports                CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos      2.963360e+05
+                      CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos      2.605480e+05
+                      CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos      2.242434e+05
+                      Real Life Trick Shots 2 | Dude Perfect                                      Dude Perfect      2.112357e+05
+                      Boomerang Trick Shots | Dude Perfect                                        Dude Perfect      2.069000e+05
+Travel & Events       LEGENDARY All You Can Eat Buffet in Manila Phil...                     Strictly Dumpling      1.051200e+04
+                      Eating With My DAD!                                                           Mark Wiens      8.594000e+03
+                      LEGENDARY All You Can Eat Buffet in Manila Phil...                     Strictly Dumpling      8.012000e+03
+                      Eating BRUNCH at Taiwan 7-ELEVEN                                       Strictly Dumpling      7.419667e+03
+                      Eating BRUNCH at Taiwan 7-ELEVEN                                       Strictly Dumpling      7.317500e+03
+
+ -------------------- TOP VIDEOS WHOSE << DISLIKES >> GROW FASTEST AMONG CATEGORIES --------------------
+
+                                                                                       channel_title  growth_rate_dislike
+category              title                                                                                              
+Autos & Vehicles      Official Ram Trucks Super Bowl Commercial | Dr....                  Ram Trucks          4840.500000
+                      Official Ram Trucks Super Bowl Commercial | Dr....                  Ram Trucks          3931.000000
+                      Official Ram Trucks Super Bowl Commercial | Dr....                  Ram Trucks          3041.250000
+                      Official Ram Trucks Super Bowl Commercial | Dr....                  Ram Trucks          2458.000000
+                      I TOOK THE $3,000,000 LAMBO TO CARMAX! They off...                 hp_overload           813.666667
+Comedy                EVERY FART EVER                                                          Smosh          6416.000000
+                      EVERY FART EVER                                                          Smosh          6416.000000
+                      EVERY FART EVER                                                          Smosh          5614.666667
+                      EVERY FART EVER                                                          Smosh          5614.666667
+                      Anitta & J Balvin - Downtown (Official Lyric Vi...                   Lele Pons          5441.666667
+Education             Is Meat Bad for You? Is Meat Unhealthy?             Kurzgesagt – In a Nutshell          2863.500000
+                      Universal Basic Income Explained – Free Money f...  Kurzgesagt – In a Nutshell          2842.000000
+                      Universal Basic Income Explained – Free Money f...  Kurzgesagt – In a Nutshell          2609.000000
+                      Universal Basic Income Explained – Free Money f...  Kurzgesagt – In a Nutshell          2131.750000
+                      Humongous Turkey Lollipop                                   The King of Random          1874.000000
+Entertainment         So Sorry.                                                     Logan Paul Vlogs        355257.333333
+                      So Sorry.                                                     Logan Paul Vlogs        319721.750000
+                      So Sorry.                                                     Logan Paul Vlogs        314560.000000
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind           YouTube Spotlight        294981.333333
+                      So Sorry.                                                     Logan Paul Vlogs        283155.400000
+Film & Animation      Terminator: Dark Fate - Official Teaser Trailer...          Paramount Pictures         16865.000000
+                      Terminator: Dark Fate - Official Teaser Trailer...          Paramount Pictures         12193.333333
+                      Terminator: Dark Fate - Official Teaser Trailer...          Paramount Pictures         11894.500000
+                      I Feel Pretty Trailer #1 | Movieclips Trailers             Movieclips Trailers          7522.666667
+                      I Feel Pretty Trailer #1 | Movieclips Trailers             Movieclips Trailers          7273.000000
+Gaming                Official Call of Duty®: Black Ops 4 — Multiplay...                Call of Duty         41001.000000
+                      Official Call of Duty®: Black Ops 4 — Multiplay...                Call of Duty         34928.600000
+                      Official Call of Duty®: Black Ops 4 — Multiplay...                Call of Duty         30104.333333
+                      Official Call of Duty®: Black Ops 4 — Multiplay...                Call of Duty         30104.333333
+                      Official Call of Duty®: Black Ops 4 — Multiplay...                Call of Duty         26327.000000
+Howto & Style         42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE               5-Minute Crafts          7403.555556
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE               5-Minute Crafts          7403.555556
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE               5-Minute Crafts          7209.000000
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE               5-Minute Crafts          7199.375000
+                      42 HOLY GRAIL HACKS THAT WILL SAVE YOU A FORTUNE               5-Minute Crafts          7199.375000
+Music                 BTS (방탄소년단) 'FAKE LOVE' Official MV                                    ibighit         39682.000000
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                    ibighit         36353.500000
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                    ibighit         35491.500000
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                    ibighit         31204.600000
+                      Shakira - Trap (Official Video) ft. Maluma                         shakiraVEVO         28053.000000
+News & Politics       The FCC repeals its net neutrality rules                       Washington Post         55353.500000
+                      The FCC repeals its net neutrality rules                       Washington Post         42216.333333
+                      The FCC repeals its net neutrality rules                       Washington Post         32709.000000
+                      The FCC repeals its net neutrality rules                       Washington Post         32709.000000
+                      The FCC repeals its net neutrality rules                       Washington Post         26487.800000
+Nonprofits & Activism Suicide: Be Here Tomorrow.                                    Logan Paul Vlogs        111515.333333
+                      Suicide: Be Here Tomorrow.                                    Logan Paul Vlogs         99589.500000
+                      Suicide: Be Here Tomorrow.                                    Logan Paul Vlogs         87037.800000
+                      Suicide: Be Here Tomorrow.                                    Logan Paul Vlogs         76943.166667
+                      Suicide: Be Here Tomorrow.                                    Logan Paul Vlogs         73821.500000
+People & Blogs        PSA from Chairman of the FCC Ajit Pai                             Daily Caller         31263.000000
+                      we broke up                                                       David Dobrik         29965.000000
+                      PSA from Chairman of the FCC Ajit Pai                             Daily Caller         28019.000000
+                      Jake Paul - Randy Savage (FT. Team 10 + Jitt & ...                   Jake Paul         27984.666667
+                      PSA from Chairman of the FCC Ajit Pai                             Daily Caller         25380.666667
+Pets & Animals        BITTEN by a GIANT DESERT CENTIPEDE!                           Brave Wilderness           823.000000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                           Brave Wilderness           784.666667
+                      BITTEN by a GIANT DESERT CENTIPEDE!                           Brave Wilderness           748.500000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                           Brave Wilderness           748.500000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                           Brave Wilderness           678.200000
+Science & Technology  iPhone X — Animoji: Taxi Driver — Apple                                  Apple         13117.000000
+                      iPhone X — Animoji: Taxi Driver — Apple                                  Apple         13117.000000
+                      Selling My iPhone X To a Machine at Walmart                         TechSmartt         11636.000000
+                      Selling My iPhone X To a Machine at Walmart                         TechSmartt         10616.750000
+                      iPhone X — Animoji: Taxi Driver — Apple                                  Apple          9895.666667
+Shows                 Game of Zones - S5:E5: The Isle of Van Gundy                   Bleacher Report           153.666667
+                      Game of Zones - S5:E5: The Isle of Van Gundy                   Bleacher Report           128.250000
+                      Game of Zones - S5:E5: The Isle of Van Gundy                   Bleacher Report           128.250000
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...             Bleacher Report           103.333333
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...             Bleacher Report            92.750000
+Sports                Fergie Performs The U.S. National Anthem / 2018...              MLG Highlights         39042.666667
+                      Fergie Performs The U.S. National Anthem / 2018...              MLG Highlights         35328.750000
+                      Fergie Performs The U.S. National Anthem / 2018...              MLG Highlights         30288.400000
+                      Fergie Performs The U.S. National Anthem / 2018...              MLG Highlights         23527.285714
+                      Fergie Performs The U.S. National Anthem / 2018...              MLG Highlights         21141.000000
+Travel & Events       Donald Trump audio-animatronic figure at the ne...                    wdwmagic          2562.666667
+                      Donald Trump audio-animatronic figure at the ne...                    wdwmagic          2162.000000
+                      Donald Trump audio-animatronic figure at the ne...                    wdwmagic          2162.000000
+                      Donald Trump audio-animatronic figure at the ne...                    wdwmagic          1757.200000
+                      Donald Trump audio-animatronic figure at the ne...                    wdwmagic          1757.200000
+
+ -------------------- TOP VIDEOS WHOSE << COMMENT_COUNT >> GROW FASTEST AMONG CATEGORIES --------------------
+
+                                                                                                 channel_title  growth_rate_comment
+category              title                                                                                                        
+Autos & Vehicles      The Spyker C8 Is the Quirkiest $250,000 Exotic ...                           Doug DeMuro          2892.000000
+                      Here’s Why the 2018 Lincoln Navigator is Worth ...                           Doug DeMuro          2772.000000
+                      Here’s Why the 2018 Lincoln Navigator is Worth ...                           Doug DeMuro          2772.000000
+                      The Toyota Previa Is the Weirdest Minivan Ever                               Doug DeMuro          2448.333333
+                      The Spyker C8 Is the Quirkiest $250,000 Exotic ...                           Doug DeMuro          2389.000000
+Comedy                YOUR GOD-AWFUL RESOLUTIONS (plus announcement) ...                            jacksfilms         28239.500000
+                      CONFRONTING MY DAD                                                                 shane         25251.000000
+                      My Horibal Speling                                                           TheOdd1sOut         25097.000000
+                      My Horibal Speling                                                           TheOdd1sOut         23521.666667
+                      You, but in emojis. (YIAY #375)                                               jacksfilms         21502.000000
+Education             Is Meat Bad for You? Is Meat Unhealthy?                       Kurzgesagt – In a Nutshell          9477.000000
+                      Universal Basic Income Explained – Free Money f...            Kurzgesagt – In a Nutshell          8995.500000
+                      Universal Basic Income Explained – Free Money f...            Kurzgesagt – In a Nutshell          8218.000000
+                      The Side Effects of Vaccines - How High is the ...            Kurzgesagt – In a Nutshell          7999.375000
+                      The Deadliest Being on Planet Earth – The Bacte...            Kurzgesagt – In a Nutshell          7872.000000
+Entertainment         So Sorry.                                                               Logan Paul Vlogs        366686.500000
+                      So Sorry.                                                               Logan Paul Vlogs        353217.000000
+                      So Sorry.                                                               Logan Paul Vlogs        309704.250000
+                      So Sorry.                                                               Logan Paul Vlogs        238849.800000
+                      YouTube Rewind: The Shape of 2017 | #YouTubeRewind                     YouTube Spotlight        234256.333333
+Film & Animation      How to Make Life More Interesting                                      Jaiden Animations         30931.000000
+                      Jaiden & Boyinaband - Empty (Official Music Video)                     Jaiden Animations         29230.333333
+                      Jaiden & Boyinaband - Empty (Official Music Video)                     Jaiden Animations         23314.500000
+                      How to Make Life More Interesting                                      Jaiden Animations         23239.666667
+                      Jaiden & Boyinaband - Empty (Official Music Video)                     Jaiden Animations         20189.600000
+Gaming                LOOK AT WHAT HE TURNED ME INTO... (ft. James Ch...                              FaZe Rug         38750.000000
+                      Official Call of Duty®: Black Ops 4 — Multiplay...                          Call of Duty         28875.250000
+                      Game Theory: FNAF STUMPED Me! (FNAF 6 Ultimate ...                    The Game Theorists         28429.000000
+                      LOOK AT WHAT HE TURNED ME INTO... (ft. James Ch...                              FaZe Rug         27625.500000
+                      Pokémon: Let's Go, Pikachu! and Pokémon: Let's ...  The Official Pokémon YouTube channel         25167.000000
+Howto & Style         NEW WET N WILD 'GOTH-O-GRAPHIC' COLLECTION | HI...                           jeffreestar         57042.666667
+                      NEW WET N WILD 'GOTH-O-GRAPHIC' COLLECTION | HI...                           jeffreestar         45894.750000
+                      NEW WET N WILD 'GOTH-O-GRAPHIC' COLLECTION | HI...                           jeffreestar         45894.750000
+                      FULL FACE USING ONLY MY MOM'S MAKEUP Challenge ...                       NikkieTutorials         41360.666667
+                      NEW WET N WILD 'GOTH-O-GRAPHIC' COLLECTION | HI...                           jeffreestar         38401.800000
+Music                 BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit        346152.500000
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit        301970.666667
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit        260228.000000
+                      BTS (방탄소년단) 'FAKE LOVE' Official MV                                              ibighit        216884.200000
+                      BTS (방탄소년단) 'MIC Drop (Steve Aoki Remix)' Offic...                               ibighit        197781.000000
+News & Politics       Shooting survivor confronts NRA spokesperson Da...                                   CNN         12978.666667
+                      Tapper cuts off Trump adviser interview: I've w...                                   CNN         11969.333333
+                      Shooting survivor confronts NRA spokesperson Da...                                   CNN         11504.500000
+                      Physicist Stephen Hawking has died                                                   CNN         10407.000000
+                      The FCC repeals its net neutrality rules                                 Washington Post          9921.500000
+Nonprofits & Activism Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs        187158.666667
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs        181566.500000
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs        152831.750000
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs        121529.200000
+                      Suicide: Be Here Tomorrow.                                              Logan Paul Vlogs        104167.000000
+People & Blogs        we broke up                                                                 David Dobrik        118953.500000
+                      Melting Every Lipstick From Sephora Together                              Safiya Nygaard        107151.666667
+                      MOMMY AND DAUGHTER SURPRISE DADDY WITH PREGNANC...                        The ACE Family         89698.000000
+                      we broke up                                                                 David Dobrik         88135.000000
+                      Melting Every Lipstick From Sephora Together                              Safiya Nygaard         87278.000000
+Pets & Animals        BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness         16299.000000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness         12638.000000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness         11015.750000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness         11015.750000
+                      BITTEN by a GIANT DESERT CENTIPEDE!                                     Brave Wilderness          8018.000000
+Science & Technology  Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE         30584.500000
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE         29731.333333
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE         28329.200000
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE         25356.000000
+                      Do You Hear Yanny or Laurel? (SOLVED with SCIENCE)                           AsapSCIENCE         22608.142857
+Shows                 You're not crazy. Apple is slowing down older i...                                  CNET           713.000000
+                      You're not crazy. Apple is slowing down older i...                                  CNET           713.000000
+                      Game of Zones - Game of Zones - S5:E1: 'A Golde...                       Bleacher Report           608.333333
+                      You're not crazy. Apple is slowing down older i...                                  CNET           548.333333
+                      You're not crazy. Apple is slowing down older i...                                  CNET           548.333333
+Sports                CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos         23828.666667
+                      CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos         19961.000000
+                      CRISTIANO RONALDO E FRED, O GRANDE ENCONTRO                                 Desimpedidos         16732.000000
+                      GIANT ICE BLOCK Vs. TRAMPOLINE from 45m!                                  How Ridiculous         16077.000000
+                      Football vs Soccer Trick Shots | Dude Perfect                               Dude Perfect         15744.666667
+Travel & Events       Donald Trump audio-animatronic figure at the ne...                              wdwmagic          2934.666667
+                      Donald Trump audio-animatronic figure at the ne...                              wdwmagic          2443.750000
+                      Donald Trump audio-animatronic figure at the ne...                              wdwmagic          2443.750000
+                      Donald Trump audio-animatronic figure at the ne...                              wdwmagic          1903.000000
+                      Donald Trump audio-animatronic figure at the ne...                              wdwmagic          1903.000000
+
+ -------------------- TOP CHANNELS --------------------
+
+                                                              count
+channel_title                           category                   
+ESPN                                    Sports                  383
+NBA                                     Sports                  367
+CNN                                     News & Politics         343
+Late Night with Seth Meyers             Comedy                  332
+TheEllenShow                            Entertainment           328
+Vox                                     News & Politics         327
+The Late Show with Stephen Colbert      Entertainment           312
+The Tonight Show Starring Jimmy Fallon  Comedy                  312
+Netflix                                 Entertainment           310
+TED-Ed                                  Education               307
+Tom Scott                               Education               293
+Screen Junkies                          Film & Animation        288
+Saturday Night Live                     Entertainment           286
+HellthyJunkFood                         Entertainment           285
+BuzzFeedVideo                           People & Blogs          284
+Good Mythical Morning                   Entertainment           284
+WWE                                     Sports                  281
+Life Noggin                             Education               280
+The King of Random                      Education               274
+CollegeHumor                            Comedy                  268
+FBE                                     Entertainment           259
+jacksfilms                              Comedy                  256
+First We Feast                          Howto & Style           255
+SciShow                                 Education               253
+Vanity Fair                             Entertainment           249
+Smosh                                   Comedy                  240
+ABC News                                News & Politics         238
+Safiya Nygaard                          People & Blogs          237
+Marques Brownlee                        Science & Technology    235
+Tasty                                   Howto & Style           231
+Dude Perfect                            Sports                  227
+Great Big Story                         People & Blogs          221
+NFL                                     Sports                  221
+James Charles                           Entertainment           217
+Warner Bros. Pictures                   Entertainment           217
+The Late Late Show with James Corden    Entertainment           216
+Washington Post                         News & Politics         214
+AsapSCIENCE                             Science & Technology    212
+Binging with Babish                     Entertainment           211
+E! Entertainment                        Entertainment           211
+The Voice                               Entertainment           211
+Kurzgesagt – In a Nutshell              Education               205
+CrazyRussianHacker                      Science & Technology    204
+NikkieTutorials                         Howto & Style           203
+NBC News                                News & Politics         201
+Jimmy Kimmel Live                       Entertainment           200
+Complex                                 Entertainment           197
+Inside Edition                          News & Politics         197
+Brave Wilderness                        Pets & Animals          193
+REACT                                   Entertainment           192
+Team Coco                               Comedy                  192
+Star Wars                               Entertainment           191
+WIRED                                   Entertainment           189
+You Suck At Cooking                     Howto & Style           185
+Tati                                    Howto & Style           184
+IISuperwomanII                          Comedy                  183
+The Graham Norton Show                  Entertainment           183
+20th Century Fox                        Film & Animation        181
+Rosanna Pansino                         Howto & Style           179
+TODAY                                   News & Politics         179
+Hannah Stocking                         Comedy                  178
+Simon's Cat                             Pets & Animals          178
+Bon Appétit                             Howto & Style           176
+The Verge                               Science & Technology    175
+Laura Lee                               Howto & Style           173
+CinemaSins                              Film & Animation        168
+Marvel Entertainment                    Entertainment           168
+Watch What Happens Live with Andy Cohen Entertainment           168
+Refinery29                              Howto & Style           165
+itsAlexClark                            Film & Animation        165
+CBS News                                News & Politics         163
+The Dodo                                Pets & Animals          162
+The Film Theorists                      Film & Animation        161
+Universal Pictures                      Entertainment           161
+CaseyNeistat                            People & Blogs          156
+LaurDIY                                 Howto & Style           155
+American Idol                           Entertainment           154
+Domics                                  Comedy                  154
+Michelle Khare                          Entertainment           154
+NBC Sports                              Sports                  154
+As/Is                                   People & Blogs          151
+Matt Stonie                             Entertainment           151
+How To Cake It                          Howto & Style           149
+The New York Times                      News & Politics         149
+Studio C                                Comedy                  148
+LOL Network                             Comedy                  147
+nigahiga                                Entertainment           146
+Amber Scholl                            Howto & Style           143
+Guava Juice                             Entertainment           143
+Sony Pictures Entertainment             Entertainment           142
+William Osman                           Science & Technology    142
+PTXofficial                             Music                   140
+TIME                                    News & Politics         140
+ExplosmEntertainment                    Comedy                  139
+HBO                                     Film & Animation        139
+BuzzFeedBlue                            People & Blogs          138
+Good Morning America                    Entertainment           138
+How Ridiculous                          Sports                  138
+Half as Interesting                     Education               137
+Linus Tech Tips                         Science & Technology    137
